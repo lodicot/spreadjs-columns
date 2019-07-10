@@ -14,23 +14,39 @@ interface dataDef {
 })
 
 export class SelectorComponent implements OnInit {
+
+  constructor() {
+  }
   rowHeaderVisible = false;
   autoGenerateColumns = false;
   sheetName = 'Adress Book';
 
   private spread: GC.Spread.Sheets.Workbook;
   private activeSheet;
-  private widths = [];
+  private rows;
+  private widths: string[] = [];
 
-  constructor() {
-  }
+  hostStyle = {
+    top: '120px',
+    bottom: '800px'
+  };
+
+  data: Array<dataDef> = [
+    {company: 'APT Treuhand', firstName: 'Alice', lastName: 'Müller'},
+    {company: 'ABB', firstName: 'Aimee', lastName: 'Forster'},
+    {company: 'Simens', firstName: 'Lukas', lastName: 'Petermann'},
+    {company: 'Roche', firstName: 'Fred', lastName: 'Feuerstein'},
+    {company: 'Novartis', firstName: 'Peter', lastName: 'Pan'},
+    {company: 'KWC', firstName: 'Hans', lastName: 'Gerber'},
+    {company: 'Müller Martini', firstName: 'Lucky', lastName: 'Luke'}
+  ];
 
   ngOnInit() {
   }
 
   onColumnWidthChanged(args) {
-    const rows = this.activeSheet.getColumnCount();
-    for (let i = 0; i < rows; i++) {
+    this.rows = this.activeSheet.getColumnCount();
+    for (let i = 0; i < this.rows; i++) {
       const width = this.activeSheet.getColumnWidth(i) - 10;
       this.widths[i] = width + 'px';
       console.log(this.widths[i]);
@@ -51,29 +67,15 @@ export class SelectorComponent implements OnInit {
     // tsheet.forEach(ele => console.log(Object.keys(ele[0])));
   }
 
-  getWidth(): string {
-    console.log(`Width: ${this.widths[0]}`);
-    return this.widths[0];
-  }
-
   workbookInit(args) {
     this.spread = args.spread;
     this.activeSheet = this.spread.getActiveSheet();
+    this.rows = this.activeSheet.getColumnCount();
+    for (let i = 0; i < this.rows; i++) {
+      const width = this.activeSheet.getColumnWidth(i) - 10;
+      this.widths[i] = width + 'px';
+      console.log(this.widths[i]);
+    }
   }
-
-  hostStyle = {
-    top: '120px',
-    bottom: '800px'
-  };
-
-  data: Array<dataDef> = [
-    {company: 'APT Treuhand', firstName: 'Alice', lastName: 'Müller'},
-    {company: 'ABB', firstName: 'Aimee', lastName: 'Forster'},
-    {company: 'Simens', firstName: 'Lukas', lastName: 'Petermann'},
-    {company: 'Roche', firstName: 'Fred', lastName: 'Feuerstein'},
-    {company: 'Novartis', firstName: 'Peter', lastName: 'Pan'},
-    {company: 'KWC', firstName: 'Hans', lastName: 'Gerber'},
-    {company: 'Müller Martini', firstName: 'Lucky', lastName: 'Luke'}
-  ];
 
 }

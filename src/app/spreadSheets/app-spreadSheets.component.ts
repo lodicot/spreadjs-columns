@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {DataService} from "../app-data.service";
+import {Component} from '@angular/core';
+import {DataService} from '../app-data.service';
 @Component({
     templateUrl: './app-spreadSheets.component.html'
 })

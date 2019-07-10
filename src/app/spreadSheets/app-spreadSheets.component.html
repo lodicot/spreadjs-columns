@@ -4,12 +4,18 @@
 </div>
 
 <div>
-    <gc-spread-sheets [hostStyle]="hostStyle" [newTabVisible]="newTabVisible" [tabStripVisible]="tabStripVisible"
+    <gc-spread-sheets [hostStyle]="hostStyle"
+                      [newTabVisible]="newTabVisible"
+                      [tabStripVisible]="tabStripVisible"
                       [showHorizontalScrollbar]="showHorizontalScrollbar"
-                      [showVerticalScrollbar]="showVerticalScrollbar" [backColor]="spreadBackColor"
-                      [grayAreaBackColor]="grayAreaBackColor" [allowUserZoom]="allowUserZoom"
-                      [allowUserResize]="allowUserResize" hostClass="spreadContainer">
-        <gc-worksheet [dataSource]="data" [autoGenerateColumns]="autoGenerateColumns">
+                      [showVerticalScrollbar]="showVerticalScrollbar"
+                      [backColor]="spreadBackColor"
+                      [grayAreaBackColor]="grayAreaBackColor"
+                      [allowUserZoom]="allowUserZoom"
+                      [allowUserResize]="allowUserResize"
+                      hostClass="spreadContainer">
+        <gc-worksheet [dataSource]="data"
+                      [autoGenerateColumns]="autoGenerateColumns">
             <gc-column width=150 dataField="Name"></gc-column>
             <gc-column width=150 dataField="CountryRegionCode"></gc-column>
             <gc-column width=100 dataField="City"></gc-column>

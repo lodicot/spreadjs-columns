@@ -1,9 +1,11 @@
 <div class="container-fluid" id="noPadding">
   <h1 id="test">Select something</h1>
 
-  <app-drop-button [width]="widths[0]"></app-drop-button>
-  <app-drop-button [width]="widths[1]"></app-drop-button>
-  <app-drop-button [width]="widths[2]"></app-drop-button>
+<!--  <app-drop-button [width]="widths[0]"></app-drop-button>-->
+<!--  <app-drop-button [width]="widths[1]"></app-drop-button>-->
+<!--  <app-drop-button [width]="widths[2]"></app-drop-button>-->
+
+  <app-drop-button *ngFor="let width of widths" [width]="width"></app-drop-button>
 
   <div class="container">
     <gc-spread-sheets
