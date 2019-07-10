@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
+    "experimentalDecorators": true,
+    "outDir": "../out-tsc/app",
+    "types": []
+  }
+}

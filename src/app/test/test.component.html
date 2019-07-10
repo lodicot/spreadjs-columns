@@ -1,0 +1,84 @@
+<h3>This is a test page!</h3>
+
+<div>
+  <p>My first spread sheet:</p>
+  <gc-spread-sheets
+    [hostStyle]="hostStyle"
+    [newTabVisible]="newTabVisible"
+    [tabStripVisible]="tabStripVisible"
+    [backColor]="spreadBackColor"
+    [grayAreaBackColor]="grayAreaBackColor"
+    hostClass="spreadContainer"
+    (workbookInitialized)="workbookInit($event)">
+    <gc-worksheet
+      [name]="sheetName"
+      [dataSource]="data"
+      [autoGenerateColumns]="autoGenerateColumns"
+      [rowHeaderVisible]="rowHeaderVisible"
+      [colHeaderVisible]="columnHeaderVisible"
+      [selectionBackColor]="selectionBackColor"
+      [selectionBorderColor]="selectionBorderColor">
+      <gc-column width="100" dataField="name" headerText="Name" [style]="nameStyle" [resizable]="resizable"></gc-column>
+      <gc-column width="50" dataField="Age" [style]="ageStyle" [resizable]="resizable"></gc-column>
+      <gc-column width="50" dataField="Position" [resizable]="resizable"></gc-column>
+      <gc-column width="150" dataField="Birthday" [resizable]="resizable"></gc-column>
+      <gc-column width="40" dataField="happy" headerText="Happy" [cellType]="checkBoxCellType" [resizable]="resizable"></gc-column>
+      <gc-column width="100" dataField="pet" headerText="Pet" [resizable]="resizable"></gc-column>
+      <gc-column [width]="width" dataField="salary" headerText="Salary" [formatter]="formatter" [visible]="visible" [resizable]="resizable"></gc-column>
+    </gc-worksheet>
+    <gc-worksheet [name]="'TestSheet2'"></gc-worksheet>
+  </gc-spread-sheets>
+</div>
+
+<div class="settingContainer">
+  <table>
+    <tr>
+      <td>
+        <label><input type="checkbox" [(ngModel)]="rowHeaderVisible"/>rowHeaderVisible</label>
+      </td>
+      <td>
+        <label><input type="checkbox" [(ngModel)]="columnHeaderVisible"/>columnHeaderVisible</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label><input type="checkbox" [(ngModel)]="newTabVisible">new Tab Visible</label>
+      </td>
+      <td>
+        <label><input type="checkbox" [(ngModel)]="tabStripVisible">tabStripVisible</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="color" [(ngModel)]="spreadBackColor"/> backColor
+      </td>
+      <td>
+        <input type="color" [(ngModel)]="grayAreaBackColor"/> grayAreaBackColor
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="color" [(ngModel)]="selectionBackColor"/> selectionBackColor
+      </td>
+      <td>
+        <input type="color" [(ngModel)]="selectionBorderColor"/> selectionBorderColor
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label><input type="checkbox" [(ngModel)]="visible"/>visible</label>
+      </td>
+      <td>
+        <label><input type="checkbox" [(ngModel)]="resizable"/>resizable</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label><input type="text" [(ngModel)]="width"/>width</label>
+      </td>
+      <td>
+        <label><input type="text" [(ngModel)]="formatter"/>formatter</label>
+      </td>
+    </tr>
+  </table>
+</div>

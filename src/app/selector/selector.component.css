@@ -1,0 +1,8 @@
+#noPadding {
+  padding: 0;
+}
+
+.test {
+  width: 150px;
+  background-color: aqua;
+}

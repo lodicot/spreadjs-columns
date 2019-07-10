@@ -1,0 +1,26 @@
+<div class="container-fluid" id="noPadding">
+  <h1 id="test">Select something</h1>
+
+  <app-drop-button [width]="widths[0]"></app-drop-button>
+  <app-drop-button [width]="widths[1]"></app-drop-button>
+  <app-drop-button [width]="widths[2]"></app-drop-button>
+
+  <div class="container">
+    <gc-spread-sheets
+      hostClass="spreadContainer"
+      [hostStyle]="hostStyle"
+      (columnWidthChanged)="onColumnWidthChanged($event)"
+      (workbookInitialized)="workbookInit($event)">
+      <gc-worksheet
+        [name]="sheetName"
+        [dataSource]="data"
+        [autoGenerateColumns]="autoGenerateColumns"
+        [rowHeaderVisible]="rowHeaderVisible">
+        <gc-column width="150" dataField="company" headerText="Company"></gc-column>
+        <gc-column width="150" dataField="firstName" headerText="First name"></gc-column>
+        <gc-column width="150" dataField="lastName" headerText="Last name"></gc-column>
+      </gc-worksheet>
+    </gc-spread-sheets>
+  </div>
+</div>
+

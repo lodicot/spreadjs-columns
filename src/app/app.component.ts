@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'my-app',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'spreadSheet';
+    appHeader = 'Spread Sheets Angular Sample';
+    appFooter = '© 2019 GrapeCity, inc. All Rights Reserved. All product and company names herein may be trademarks of their respective owners.';
 }
