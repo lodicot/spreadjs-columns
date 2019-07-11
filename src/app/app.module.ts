@@ -17,6 +17,7 @@ import { TestComponent } from './test/test.component';
 import { SelectorComponent } from './selector/selector.component';
 import {DropButtonComponent} from './selector/drop-button/drop-button.component';
 import { SelectLabelComponent } from './selector/select-label/select-label.component';
+import { SelectMenuComponent } from './selector/select-menu/select-menu.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SelectLabelComponent } from './selector/select-label/select-label.compo
         TestComponent,
         SelectorComponent,
         DropButtonComponent,
-        SelectLabelComponent
+        SelectLabelComponent,
+        SelectMenuComponent
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

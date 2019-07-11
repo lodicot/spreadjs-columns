@@ -1,13 +1,17 @@
 <div class="container-fluid" id="noPadding">
   <h1>Select something</h1>
 
+<!--  <div class="scrollmenu">-->
+<!--    <app-drop-button *ngFor="let width of widths" [width]="width"></app-drop-button>-->
+<!--    <button class="btn btn-primary">hello</button>-->
+<!--    <button class="btn btn-primary">hello</button>-->
+<!--    <button class="btn btn-primary">hello</button>-->
+<!--    <button class="btn btn-primary">hello</button>-->
+<!--    <button class="btn btn-primary">hello</button>-->
+<!--  </div>-->
+
   <div class="scrollmenu">
-    <app-drop-button *ngFor="let width of widths" [width]="width"></app-drop-button>
-    <button class="btn btn-primary">hello</button>
-    <button class="btn btn-primary">hello</button>
-    <button class="btn btn-primary">hello</button>
-    <button class="btn btn-primary">hello</button>
-    <button class="btn btn-primary">hello</button>
+    <app-select-menu *ngFor="let width of widths" [width]="width"></app-select-menu>
   </div>
 
 <!--  <div class="scrollmenu form-inline">-->
