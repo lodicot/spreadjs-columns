@@ -27,7 +27,7 @@ export class SelectorComponent implements OnInit {
   private widths: string[] = [];
 
   hostStyle = {
-    top: '120px',
+    top: '140px',
     bottom: '800px'
   };
 

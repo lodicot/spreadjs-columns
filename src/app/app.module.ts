@@ -16,6 +16,7 @@ import {DataService} from './app-data.service';
 import { TestComponent } from './test/test.component';
 import { SelectorComponent } from './selector/selector.component';
 import {DropButtonComponent} from './selector/drop-button/drop-button.component';
+import { SelectLabelComponent } from './selector/select-label/select-label.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {DropButtonComponent} from './selector/drop-button/drop-button.component'
         ToNumberPipe,
         TestComponent,
         SelectorComponent,
-        DropButtonComponent
+        DropButtonComponent,
+        SelectLabelComponent
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

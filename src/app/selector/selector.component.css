@@ -2,7 +2,10 @@
   padding: 0;
 }
 
-.test {
-  width: 150px;
-  background-color: aqua;
+.scrollmenu {
+  overflow: -moz-scrollbars-vertical;
+  overflow-x: scroll;
+  overflow-y: visible;
+  white-space: nowrap;
 }
+
