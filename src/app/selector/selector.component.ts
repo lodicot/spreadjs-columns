@@ -73,6 +73,10 @@ export class SelectorComponent implements OnInit {
     // tsheet.forEach(ele => console.log(Object.keys(ele[0])));
   }
 
+  scrolled() {
+    console.log('scrolled');
+  }
+
   workbookInit(args) {
     this.spread = args.spread;
     // this.spred.tabStripRatio

@@ -19,7 +19,8 @@
       hostClass="spreadContainer"
       [hostStyle]="hostStyle"
       (columnWidthChanged)="onColumnWidthChanged($event)"
-      (workbookInitialized)="workbookInit($event)">
+      (workbookInitialized)="workbookInit($event)"
+      (leftColumnChanged)="scrolled()">
       <gc-worksheet
         [name]="sheetName"
         [dataSource]="data"
