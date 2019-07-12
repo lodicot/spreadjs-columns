@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as GC from '@grapecity/spread-sheets/dist/GC.Spread.Sheets';
+import {stringify} from '@angular/compiler/src/util';
 
 interface dataDef {
   company: string;
@@ -51,6 +52,11 @@ export class SelectorComponent implements OnInit {
       this.widths[i] = width + 'px';
       console.log(this.widths[i]);
     }
+    console.log('Position: ' + this.activeSheet.scrollLeft);
+
+    console.log('Left Column: ' + this.spread.getActiveSheet().getViewportLeftColumn(1));
+    console.log('Right Column: ' + this.spread.getActiveSheet().getViewportRightColumn(1));
+
 
     // rows.forEach((element => console.log(element)));
 
@@ -69,6 +75,8 @@ export class SelectorComponent implements OnInit {
 
   workbookInit(args) {
     this.spread = args.spread;
+    // this.spred.tabStripRatio
+    console.log(this.spread);
     this.activeSheet = this.spread.getActiveSheet();
     this.rows = this.activeSheet.getColumnCount();
     for (let i = 0; i < this.rows; i++) {
