@@ -6,7 +6,7 @@
 <!--  </div>-->
 
   <div>
-    <app-select-menu *ngFor="let width of widths" [width]="width"></app-select-menu>
+    <app-select-menu *ngFor="let width of columnWidths" [width]="width"></app-select-menu>
   </div>
 
 <!--  <div form-inline">-->
@@ -19,7 +19,7 @@
                       [hostStyle]="hostStyle"
                       (columnWidthChanged)="onColumnWidthChanged($event)"
                       (workbookInitialized)="onWorkbookInit($event)"
-                      (leftColumnChanged)="onLeftColumnChanged()">
+                      (leftColumnChanged)="onLeftColumnChanged($event)">
       <gc-worksheet [name]="sheetName"
                     [dataSource]="data"
                     [autoGenerateColumns]="autoGenerateColumns"

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import * as GC from '@grapecity/spread-sheets/dist/GC.Spread.Sheets';
 import {stringify} from '@angular/compiler/src/util';
+import IColumnWidthChangedEventArgs = GC.Spread.Sheets.IColumnWidthChangedEventArgs;
+import ILeftColumnChangedEventArgs = GC.Spread.Sheets.ILeftColumnChangedEventArgs;
 
 interface dataDef {
   company: string;
@@ -23,9 +25,10 @@ export class SelectorComponent implements OnInit {
   sheetName = 'Adress Book';
 
   private spread: GC.Spread.Sheets.Workbook;
-  private activeSheet;
   private rows;
-  private widths: string[] = [];
+  private columnWidths: string[] = [];
+  private leftColumn = 0;
+  private rightColumn = 0;
 
   hostStyle = {
     top: '140px',
@@ -45,20 +48,8 @@ export class SelectorComponent implements OnInit {
   ngOnInit() {
   }
 
-  onColumnWidthChanged(args) {
-    this.rows = this.activeSheet.getColumnCount();
-    for (let i = 0; i < this.rows; i++) {
-      const width = this.activeSheet.getColumnWidth(i) - 10;
-      this.widths[i] = width + 'px';
-      console.log(this.widths[i]);
-    }
-    console.log('Position: ' + this.activeSheet.scrollLeft);
-
-    console.log('Left Column: ' + this.spread.getActiveSheet().getViewportLeftColumn(1));
-    console.log('Right Column: ' + this.spread.getActiveSheet().getViewportRightColumn(1));
-
-
-    // rows.forEach((element => console.log(element)));
+  onColumnWidthChanged($event: IColumnWidthChangedEventArgs) {
+    this.getColumnsWidth($event.sheet);
 
     // console.log(JSON.stringify(args));
     // console.log("ColumnWidthChanged " + JSON.stringify(args));
@@ -66,27 +57,33 @@ export class SelectorComponent implements OnInit {
     // let rows = Array.of(args.colList);
     // console.log(rows.forEach(element => console.log(element)));
 
-    // console.log(activeSheet.getColumnWidth(row));
-    // console.log(activeSheet.getColumnWidth(1));
-
     // let tsheet = Array.of(args.sheet.toJSON().columns);
     // tsheet.forEach(ele => console.log(Object.keys(ele[0])));
   }
 
-  onLeftColumnChanged() {
-    console.log('scrolled');
+  onLeftColumnChanged($event: ILeftColumnChangedEventArgs) {
+    this.leftColumn = $event.newLeftCol;
+    console.log('Left Column: ' + this.leftColumn);
+    this.rightColumn = $event.sheet.getViewportRightColumn(1);
+    console.log('Right Column: ' + this.rightColumn);
   }
 
-  onWorkbookInit(args) {
-    this.spread = args.spread;
-    // this.spred.tabStripRatio
-    console.log(this.spread);
-    this.activeSheet = this.spread.getActiveSheet();
-    this.rows = this.activeSheet.getColumnCount();
+  onWorkbookInit($event: any) {
+    const self = this;
+    self.spread = $event.spread;
+    // tslint:disable-next-line:only-arrow-functions
+    setTimeout(function() {
+      self.getColumnsWidth(self.spread.getActiveSheet());
+    });
+  }
+
+  // Set the actual columnWidths of the columns in an array
+  getColumnsWidth(sheet: GC.Spread.Sheets.Worksheet) {
+    this.rows = sheet.getColumnCount();
     for (let i = 0; i < this.rows; i++) {
-      const width = this.activeSheet.getColumnWidth(i) - 10;
-      this.widths[i] = width + 'px';
-      console.log(this.widths[i]);
+      const width = sheet.getColumnWidth(i) - 10;
+      this.columnWidths[i] = width + 'px';
+      // console.log(this.columnWidths[i]);
     }
   }
 
