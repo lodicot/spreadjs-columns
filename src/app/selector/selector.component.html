@@ -20,7 +20,8 @@
                       (columnWidthChanged)="onColumnWidthChanged($event)"
                       (workbookInitialized)="onWorkbookInit($event)"
                       (leftColumnChanged)="onLeftColumnChanged($event)"
-                      (activeSheetChanged)="onActiveSheetChanged($event)">
+                      (activeSheetChanged)="onActiveSheetChanged($event)"
+                      (columnChanged)="onColumnChanged($event, $event)">
       <gc-worksheet [name]="sheetName"
                     [dataSource]="data"
                     [autoGenerateColumns]="autoGenerateColumns"

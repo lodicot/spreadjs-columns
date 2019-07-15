@@ -4,6 +4,7 @@ import {stringify} from '@angular/compiler/src/util';
 import IColumnWidthChangedEventArgs = GC.Spread.Sheets.IColumnWidthChangedEventArgs;
 import ILeftColumnChangedEventArgs = GC.Spread.Sheets.ILeftColumnChangedEventArgs;
 import IActiveSheetChangedEventArgs = GC.Spread.Sheets.IActiveSheetChangedEventArgs;
+import IColumnChangedEventArgs = GC.Spread.Sheets.IColumnChangedEventArgs;
 
 interface dataDef {
   company: string;
@@ -81,6 +82,14 @@ export class SelectorComponent implements OnInit {
   onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
     this.columnWidths = [];
     this.getColumnsWidth($event.newSheet);
+  }
+
+  onColumnChanged($event: IColumnChangedEventArgs, $event2: any) {
+    if ($event.propertyName === 'addColumns') {
+      this.getColumnsWidth($event2.sheet);
+    } else {
+      this.columnWidths.splice($event.col, 1);
+    }
   }
 
   // Set the actual columnWidths of the columns in an array
