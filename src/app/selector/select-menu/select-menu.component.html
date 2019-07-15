@@ -1,6 +1,13 @@
-<select class="custom-select" [ngStyle]="{width: width}">
-  <option selected>Select ...</option>
-  <option value="1">Company</option>
-  <option value="2">First name</option>
-  <option value="3">Last name</option>
-</select>
+<span>
+<!--    <select class="custom-select" [ngStyle]="{'width': getWidth() + 'px'}" draggable="false">-->
+<!--        <option selected>Select ...</option>-->
+<!--        <option value="1">Company</option>-->
+<!--        <option value="2">First name</option>-->
+<!--        <option value="3">Last name</option>-->
+<!--    </select>-->
+    <span class="paragr" [ngStyle]="{'width': getWidth() + 'px', 'background-color': columnProperty.backgroundColor}" draggable="false">
+      {{columnProperty.text}}
+    </span>
+    <span class="ui-column-resizer" (mousedown)="onMouseDown($event)" [hidden]=!columnProperty.visible></span>
+</span>
+

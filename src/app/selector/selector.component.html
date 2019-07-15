@@ -5,9 +5,30 @@
 <!--    <app-drop-button *ngFor="let width of widths" [width]="width"></app-drop-button>-->
 <!--  </div>-->
 
-  <div>
-    <app-select-menu *ngFor="let width of columnWidths" [width]="width"></app-select-menu>
+<!--  <div>-->
+<!--    <app-select-menu *ngFor="let width of columnWidths" (resizingStart)="onResizingStart($event)"></app-select-menu>-->
+<!--  </div>-->
+  <div *ngIf="columnProps[0] !==undefined">
+    Select Box: Steps for getting started with the Spread Sheets in Angular applications:
+    <div class="parabar"  (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)" (mouseenter)="onMouseEnter($event)">
+      <app-select-menu  [columnProperty]=columnProps[0] (resizingStart)="onResizingStart($event)"></app-select-menu>
+      <app-select-menu  [columnProperty]=columnProps[1] (resizingStart)="onResizingStart($event)"></app-select-menu>
+      <app-select-menu  [columnProperty]=columnProps[2] (resizingStart)="onResizingStart($event)"></app-select-menu>
+      <app-select-menu  [columnProperty]=columnProps[3] (resizingStart)="onResizingStart($event)"></app-select-menu>
+      <app-select-menu  [columnProperty]=columnProps[4] (resizingStart)="onResizingStart($event)"></app-select-menu>
+    </div>
   </div>
+
+  <div *ngIf="columnProps[0] !==undefined">
+    Select Box: Steps for getting started with the Spread Sheets in Angular applications:
+    <div class="parabar" (mousemove)="onMouseMove($event)"  (mouseup)="onMouseUp($event)" (mouseenter)="onMouseEnter($event)">
+      <div class="paraitem" *ngFor="let props of columnProps; let i = index">
+        <app-select-menu  [columnProperty]=props (resizingStart)="onResizingStart($event)"></app-select-menu>
+      </div>
+    </div>
+  </div>
+
+
 
 <!--  <div form-inline">-->
 <!--      <app-select-label *ngFor="let width of widths" [width]="width"></app-select-label>-->
