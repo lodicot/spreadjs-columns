@@ -40,8 +40,8 @@ export class SelectorComponent implements OnInit {
   // the defaults for the spread workbook
   private sheetName = 'Adress Book';
   private hostStyle = {
-    top: '140px',
-    bottom: '800px'
+    top: '180px',
+    bottom: '700px'
   };
   // current leftColumn of the spread sheet
   private leftColumn = 0;

@@ -18,7 +18,9 @@ export class SelectMenuComponent implements OnInit {
 
   getWidth() {
     const dragWidth = 6;
+    console.log(this.columnProperty.width - dragWidth < 0 ? 0 : this.columnProperty.width - dragWidth);
     return this.columnProperty.width - dragWidth < 0 ? 0 : this.columnProperty.width - dragWidth;
+    // return this.columnProperty.width - dragWidth < 0 ? 0 : this.columnProperty.width - dragWidth;
   }
 
   private onMouseDown($event: MouseEvent) {
