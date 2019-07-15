@@ -3,6 +3,7 @@ import * as GC from '@grapecity/spread-sheets/dist/GC.Spread.Sheets';
 import {stringify} from '@angular/compiler/src/util';
 import IColumnWidthChangedEventArgs = GC.Spread.Sheets.IColumnWidthChangedEventArgs;
 import ILeftColumnChangedEventArgs = GC.Spread.Sheets.ILeftColumnChangedEventArgs;
+import IActiveSheetChangedEventArgs = GC.Spread.Sheets.IActiveSheetChangedEventArgs;
 
 interface dataDef {
   company: string;
@@ -75,6 +76,11 @@ export class SelectorComponent implements OnInit {
     setTimeout(function() {
       self.getColumnsWidth(self.spread.getActiveSheet());
     });
+  }
+
+  onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
+    this.columnWidths = [];
+    this.getColumnsWidth($event.newSheet);
   }
 
   // Set the actual columnWidths of the columns in an array

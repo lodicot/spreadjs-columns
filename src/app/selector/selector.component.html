@@ -19,7 +19,8 @@
                       [hostStyle]="hostStyle"
                       (columnWidthChanged)="onColumnWidthChanged($event)"
                       (workbookInitialized)="onWorkbookInit($event)"
-                      (leftColumnChanged)="onLeftColumnChanged($event)">
+                      (leftColumnChanged)="onLeftColumnChanged($event)"
+                      (activeSheetChanged)="onActiveSheetChanged($event)">
       <gc-worksheet [name]="sheetName"
                     [dataSource]="data"
                     [autoGenerateColumns]="autoGenerateColumns"
