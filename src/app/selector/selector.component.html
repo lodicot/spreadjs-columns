@@ -38,38 +38,18 @@
 <!--</div>-->
 
 <h3>Select Box</h3>
-<!--<div *ngIf="columnProps[0] !==undefined">-->
-<!--  Select Box: Steps for getting started with the Spread Sheets in Angular applications:-->
-<!--  <div class="parabar"  (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)" (mouseenter)="onMouseEnter($event)">-->
-<!--    <app-select-menu  [columnProperty]=columnProps[0] (resizingStart)="onResizingStart($event)"></app-select-menu>-->
-<!--    <app-select-menu  [columnProperty]=columnProps[1] (resizingStart)="onResizingStart($event)"></app-select-menu>-->
-<!--    <app-select-menu  [columnProperty]=columnProps[2] (resizingStart)="onResizingStart($event)"></app-select-menu>-->
-<!--    <app-select-menu  [columnProperty]=columnProps[3] (resizingStart)="onResizingStart($event)"></app-select-menu>-->
-<!--    <app-select-menu  [columnProperty]=columnProps[4] (resizingStart)="onResizingStart($event)"></app-select-menu>-->
-<!--  </div>-->
-<!--</div>-->
 
 <div *ngIf="columnProps[0] !==undefined">
   Select Box: Steps for getting started with the Spread Sheets in Angular applications:
   <div class="parabar" (mousemove)="onMouseMove($event)"  (mouseup)="onMouseUp($event)" (mouseenter)="onMouseEnter($event)">
     <div class="paraitem" *ngFor="let props of columnProps; let i = index">
-      <app-select-menu [columnProperty]=props (resizingStart)="onResizingStart($event)" (selectionChanged)="onSelectionChanged($event, i)"></app-select-menu>
+      <app-select-menu [columnProperty]=props
+                       (resizingStart)="onResizingStart($event)"
+                       (selectionChanged)="onSelectionChanged($event, i)"
+                       [selection]="selections[i]"></app-select-menu>
     </div>
   </div>
 </div>
-
-<select class="custom-select" id="selector" (change)="onChange($event)">
-  <option >Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
-<select class="custom-select" id="selector2" (click)="onChange($event)">
-  <option >Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
 
 <div>
   <gc-spread-sheets [hostStyle]="hostStyle"

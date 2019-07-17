@@ -161,7 +161,9 @@ export class SelectorComponent implements OnInit {
       console.log('column changed');
       this.getColumnsWidth($event.sheet);
       if ($event.propertyName === 'addColumns') {
-        this.selections.splice($event.col, 0, 0)
+        this.selections.splice($event.col, 0, 0);
+      } else {
+        this.selections.splice($event.col, 1);
       }
     }
   }
@@ -251,10 +253,5 @@ export class SelectorComponent implements OnInit {
     this.selections.splice(index, 1, serverData.selectedValue);
     console.log(this.selections);
   }
-
-  onChange($event) {
-    const selected = $event.target.value;
-    console.log(selected);
-    console.log($event);
-  }
+  
 }
