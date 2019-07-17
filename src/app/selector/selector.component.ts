@@ -235,4 +235,10 @@ export class SelectorComponent implements OnInit {
     }
   }
 
+  onClick() {
+    console.log('hello');
+    const e = document.getElementById('selector');
+    console.log(e.value);
+    console.log();
+  }
 }
