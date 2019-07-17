@@ -61,8 +61,7 @@ export class SelectorComponent implements OnInit {
   // My settings ************************************************************************************
   rowHeaderVisible = false;
   private rows;
-  private columnWidths: string[] = [];
-  private selections: number [] = [0, 0, 0, 0, 0];
+  private selections: number [] = [];
   private rightColumn = 0;
   // data: Array<dataDef> = [
   //   {company: 'APT Treuhand', firstName: 'Alice', lastName: 'Müller'},
@@ -79,12 +78,7 @@ export class SelectorComponent implements OnInit {
     this.data = dataservice.getPersonAddressData();
   }
 
-  ngOnInit() {
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.columnWidths.length; i++) {
-      this.selections.push(0);
-    }
-  }
+  ngOnInit() {}
 
   /**
    * spreadjs throws the event after the column with has changed
@@ -127,6 +121,11 @@ export class SelectorComponent implements OnInit {
   onWorkbookInit($event: any) {
     const self = this;
     self.spread = $event.spread;
+    const columns = self.spread.getActiveSheet().getColumnCount();
+    const sheetIndex = self.spread.getActiveSheetIndex();
+    for (let i = 0; i < columns; i++) {
+      this.selections.push(0);
+    }
     // tslint:disable-next-line:only-arrow-functions
     setTimeout(function() {
       self.getColumnsWidth(self.spread.getActiveSheet());
@@ -138,7 +137,7 @@ export class SelectorComponent implements OnInit {
    * @param $event
    */
   onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
-    this.columnWidths = [];
+    console.log(this.spread.getActiveSheetIndex());
     this.getColumnsWidth($event.newSheet);
   }
 
@@ -246,12 +245,8 @@ export class SelectorComponent implements OnInit {
   }
 
   onSelectionChanged(serverData: {selectedValue: number, selectedName: string}, index) {
-    console.log(serverData.selectedValue);
-    console.log(serverData.selectedName);
-    console.log(index);
-
     this.selections.splice(index, 1, serverData.selectedValue);
     console.log(this.selections);
   }
-  
+
 }
