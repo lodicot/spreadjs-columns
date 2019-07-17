@@ -40,7 +40,7 @@ export class SelectorComponent implements OnInit {
   // the defaults for the spread workbook
   private sheetName = 'Adress Book';
   private hostStyle = {
-    top: '180px',
+    top: '220px',
     bottom: '700px'
   };
   // current leftColumn of the spread sheet
@@ -235,10 +235,15 @@ export class SelectorComponent implements OnInit {
     }
   }
 
-  onClick() {
-    console.log('hello');
-    const e = document.getElementById('selector');
-    console.log(e.value);
-    console.log();
+  onSelectionChanged(serverData: {selectedValue: string, selectedName: string}, index) {
+    console.log(serverData.selectedValue);
+    console.log(serverData.selectedName);
+    console.log(index);
+  }
+
+  onChange($event) {
+    const selected = $event.target.value;
+    console.log(selected);
+    console.log($event);
   }
 }
