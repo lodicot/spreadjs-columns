@@ -10,7 +10,7 @@ export class SelectMenuComponent implements OnInit {
   // @Input() width: string;                                                   // my
   @Input() columnProperty?: GSpread.ColumnProperty;
   @Output() resizingStart = new EventEmitter<GSpread.ResizingStartEvent>();
-  @Output() selectionChanged = new EventEmitter<{selectedValue: string, selectedName: string}>();
+  @Output() selectionChanged = new EventEmitter<{selectedValue: number, selectedName: string}>();
 
   values = [
     {id: null, name: 'Select ...'},

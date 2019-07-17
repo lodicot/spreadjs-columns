@@ -62,6 +62,7 @@ export class SelectorComponent implements OnInit {
   rowHeaderVisible = false;
   private rows;
   private columnWidths: string[] = [];
+  private selections: number [] = [0, 0, 0, 0, 0];
   private rightColumn = 0;
   // data: Array<dataDef> = [
   //   {company: 'APT Treuhand', firstName: 'Alice', lastName: 'Müller'},
@@ -79,6 +80,10 @@ export class SelectorComponent implements OnInit {
   }
 
   ngOnInit() {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.columnWidths.length; i++) {
+      this.selections.push(0);
+    }
   }
 
   /**
@@ -155,6 +160,9 @@ export class SelectorComponent implements OnInit {
     if (this.isResizing === false) {
       console.log('column changed');
       this.getColumnsWidth($event.sheet);
+      if ($event.propertyName === 'addColumns') {
+        this.selections.splice($event.col, 0, 0)
+      }
     }
   }
 
@@ -235,10 +243,13 @@ export class SelectorComponent implements OnInit {
     }
   }
 
-  onSelectionChanged(serverData: {selectedValue: string, selectedName: string}, index) {
+  onSelectionChanged(serverData: {selectedValue: number, selectedName: string}, index) {
     console.log(serverData.selectedValue);
     console.log(serverData.selectedName);
     console.log(index);
+
+    this.selections.splice(index, 1, serverData.selectedValue);
+    console.log(this.selections);
   }
 
   onChange($event) {
