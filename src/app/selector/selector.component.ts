@@ -61,24 +61,18 @@ export class SelectorComponent implements OnInit {
   // My settings ************************************************************************************
   rowHeaderVisible = false;
   private rows;
-  private selections: number [] = [];
+  private selections: number [][] = [[], [2, 2, 2]];
   private rightColumn = 0;
-  // data: Array<dataDef> = [
-  //   {company: 'APT Treuhand', firstName: 'Alice', lastName: 'Müller'},
-  //   {company: 'ABB', firstName: 'Aimee', lastName: 'Forster'},
-  //   {company: 'Simens', firstName: 'Lukas', lastName: 'Petermann'},
-  //   {company: 'Roche', firstName: 'Fred', lastName: 'Feuerstein'},
-  //   {company: 'Novartis', firstName: 'Peter', lastName: 'Pan'},
-  //   {company: 'KWC', firstName: 'Hans', lastName: 'Gerber'},
-  //   {company: 'Müller Martini', firstName: 'Lucky', lastName: 'Luke'}
-  // ];
+  private activeSheetIndex = null;
 
   // tslint:disable-next-line:variable-name
   constructor(private dataservice: DataService, private _eventService: EventsService) {
     this.data = dataservice.getPersonAddressData();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.selections);
+  }
 
   /**
    * spreadjs throws the event after the column with has changed
@@ -86,15 +80,6 @@ export class SelectorComponent implements OnInit {
    */
   onColumnWidthChanged($event: IColumnWidthChangedEventArgs) {
     this.getColumnsWidth($event.sheet);
-
-    // console.log(JSON.stringify(args));
-    // console.log("ColumnWidthChanged " + JSON.stringify(args));
-    // let activeSheet = JSON.stringify(args.sheetName);
-    // let rows = Array.of(args.colList);
-    // console.log(rows.forEach(element => console.log(element)));
-
-    // let tsheet = Array.of(args.sheet.toJSON().columns);
-    // tsheet.forEach(ele => console.log(Object.keys(ele[0])));
   }
 
   /**
@@ -122,9 +107,11 @@ export class SelectorComponent implements OnInit {
     const self = this;
     self.spread = $event.spread;
     const columns = self.spread.getActiveSheet().getColumnCount();
-    const sheetIndex = self.spread.getActiveSheetIndex();
+    self.activeSheetIndex = self.spread.getActiveSheetIndex();
     for (let i = 0; i < columns; i++) {
-      this.selections.push(0);
+      // this.selections[0][i] = 0;
+      this.selections[self.activeSheetIndex][i] = 0;
+
     }
     // tslint:disable-next-line:only-arrow-functions
     setTimeout(function() {
@@ -159,11 +146,11 @@ export class SelectorComponent implements OnInit {
     if (this.isResizing === false) {
       console.log('column changed');
       this.getColumnsWidth($event.sheet);
-      if ($event.propertyName === 'addColumns') {
-        this.selections.splice($event.col, 0, 0);
-      } else {
-        this.selections.splice($event.col, 1);
-      }
+      // if ($event.propertyName === 'addColumns') {
+      //   this.selections[0].splice($event.col, 0, 0);
+      // } else {
+      //   this.selections.splice($event.col, 1);
+      // }
     }
   }
 

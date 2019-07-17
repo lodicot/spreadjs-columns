@@ -3,7 +3,8 @@
     <select class="custom-select"
             [ngStyle]="{'width': getWidth() + 'px'}"
             draggable="false"
-            (change)="onChange($event)" [selectedIndex]="selectedElement">
+            (change)="onChange($event)"
+            [selectedIndex]="selectedColumn">
       <option *ngFor="let v of values" [value]="v.name">
         {{v.name}}
       </option>

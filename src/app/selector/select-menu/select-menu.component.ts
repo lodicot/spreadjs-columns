@@ -8,8 +8,7 @@ import {GSpread} from '../selector.component';
 })
 export class SelectMenuComponent implements OnInit {
   // @Input() width: string;                                                   // my
-  @Input('selection') selectedElement;
-  // @Input('selection') selectedElement: {sheet: number, column: number};
+  @Input() selectedColumn;
   @Input() columnProperty?: GSpread.ColumnProperty;
   @Output() resizingStart = new EventEmitter<GSpread.ResizingStartEvent>();
   @Output() selectionChanged = new EventEmitter<{selectedValue: number, selectedName: string}>();
