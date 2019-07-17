@@ -1,12 +1,13 @@
-<!--    <select class="custom-select" [ngStyle]="{'width': getWidth() + 'px'}" draggable="false">-->
-<!--        <option selected>Select ...</option>-->
-<!--        <option value="1">Company</option>-->
-<!--        <option value="2">First name</option>-->
-<!--        <option value="3">Last name</option>-->
-<!--    </select>-->
 <span>
-  <span class="parabar" [ngStyle]="{'width': getWidth() + 'px', 'background-color': columnProperty.backgroundColor}" draggable="false">
-  {{columnProperty.text}}
+  <span class="parabar" [ngStyle]="{'width': getWidth() + 'px'}" draggable="false">
+    <select class="custom-select" [ngStyle]="{'width': getWidth() + 'px'}" draggable="false">
+      <option selected>Select ...</option>
+      <option value="1">Name</option>
+      <option value="2">Country Region Code</option>
+      <option value="3">City</option>
+      <option value="4">Address Line</option>
+      <option value="5">Postal Code</option>
+    </select>
   </span>
   <span class="ui-column-resizer" (mousedown)="onMouseDown($event)" [hidden]=!columnProperty.visible></span>
 </span>
