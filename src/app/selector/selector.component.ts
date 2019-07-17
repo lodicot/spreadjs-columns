@@ -109,7 +109,6 @@ export class SelectorComponent implements OnInit {
     const columns = self.spread.getActiveSheet().getColumnCount();
     self.activeSheetIndex = self.spread.getActiveSheetIndex();
     for (let i = 0; i < columns; i++) {
-      // this.selections[0][i] = 0;
       this.selections[self.activeSheetIndex][i] = 0;
 
     }
@@ -232,7 +231,7 @@ export class SelectorComponent implements OnInit {
   }
 
   onSelectionChanged(serverData: {selectedValue: number, selectedName: string}, index) {
-    this.selections.splice(index, 1, serverData.selectedValue);
+    this.selections[0].splice(index, 1, serverData.selectedValue);
     console.log(this.selections);
   }
 
