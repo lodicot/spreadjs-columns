@@ -123,7 +123,7 @@ export class SelectorComponent implements OnInit {
    * @param $event
    */
   onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
-    console.log(this.spread.getActiveSheetIndex());
+    this.activeSheetIndex = this.spread.getActiveSheetIndex();
     this.getColumnsWidth($event.newSheet);
   }
 

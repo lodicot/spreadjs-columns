@@ -46,7 +46,7 @@
       <app-select-menu [columnProperty]=props
                        (resizingStart)="onResizingStart($event)"
                        (selectionChanged)="onSelectionChanged($event, i)"
-                       [selectedColumn]="selections"></app-select-menu>
+                       [selectedColumn]="selections[activeSheetIndex][i]"></app-select-menu>
     </div>
   </div>
 </div>
