@@ -8,12 +8,6 @@ import {DataService} from '../app-data.service';
 import {EventsService} from '../service/events.service';
 import SheetArea = GC.Spread.Sheets.SheetArea;
 
-interface dataDef {
-  company: string;
-  firstName: string;
-  lastName: string;
-}
-
 export namespace GSpread {
   export interface ColumnProperty {
     width: number;
@@ -40,8 +34,8 @@ export class SelectorComponent implements OnInit {
   // the defaults for the spread workbook
   private sheetName = 'Adress Book';
   private hostStyle = {
-    top: '220px',
-    bottom: '700px'
+    top: '140px',
+    bottom: '150px'
   };
   // current leftColumn of the spread sheet
   private leftColumn = 0;
@@ -60,14 +54,12 @@ export class SelectorComponent implements OnInit {
 
   // My settings ************************************************************************************
   rowHeaderVisible = false;
-  private rows;
   private selections: number [][] = [];
-  private rightColumn = 0;
   private activeSheetIndex = null;
   private numberOfSheets = null;
 
   // tslint:disable-next-line:variable-name
-  constructor(private dataservice: DataService, private _eventService: EventsService) {
+  constructor(private dataservice: DataService) {
     this.data = dataservice.getPersonAddressData();
   }
 
@@ -87,14 +79,6 @@ export class SelectorComponent implements OnInit {
    * spreadjs throws the event after the column with has changed
    * @param $event
    */
-  // MY FUNCTIN**************************************************************************
-  // onLeftColumnChanged($event: ILeftColumnChangedEventArgs) {
-  //   this.leftColumn = $event.newLeftCol;
-  //   console.log('Left Column: ' + this.leftColumn);
-  //   this.rightColumn = $event.sheet.getViewportRightColumn(1);
-  //   console.log('Right Column: ' + this.rightColumn);
-  // }
-  // ***********************************************************************************
   onLeftColumnChanged($event: ILeftColumnChangedEventArgs) {
     this.leftColumn = $event.newLeftCol;
     this.getColumnsWidth($event.sheet);
@@ -151,15 +135,6 @@ export class SelectorComponent implements OnInit {
    * spreadjs throws the event at changing of column width or at insert or delete of columns
    * @param $event
    */
-  // MY FUNCTION********************************************************************************
-  // onColumnChanged($event: IColumnChangedEventArgs, $event2: any) {
-  //   if ($event.propertyName === 'addColumns') {
-  //     this.getColumnsWidth($event2.sheet);
-  //   } else {
-  //     this.columnWidths.splice($event.col, 1);
-  //   }
-  // }
-  // ********************************************************************************************
   onColumnChanged($event: IColumnChangedEventArgs) {
     // console.log("column changed " + this.isResizing);
     if (this.isResizing === false) {
@@ -218,17 +193,6 @@ export class SelectorComponent implements OnInit {
     return this.colors[i % this.colors.length];
   }
 
-  // Set the actual columnWidths of the columns in an array
-  // MY FUNCTION***********************************************************************
-  // getColumnsWidth(sheet: GC.Spread.Sheets.Worksheet) {
-  //   this.rows = sheet.getColumnCount();
-  //   for (let i = 0; i < this.rows; i++) {
-  //     const width = sheet.getColumnWidth(i) - 10;
-  //     this.columnWidths[i] = width + 'px';
-  //     // console.log(this.columnWidths[i]);
-  //   }
-  // }
-  // *********************************************************************************
   getColumnsWidth(sheet: GC.Spread.Sheets.Worksheet) {
     this.columnProps = [];
     for (let i = 0; i < sheet.getColumnCount(); i++) {

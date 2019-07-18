@@ -9,6 +9,7 @@ import {StyleComponent} from '../style/app-style.component';
 import {OutlineComponent} from '../outline/app-outline.component';
 import {TestComponent} from '../test/test.component';
 import {SelectorComponent} from '../selector/selector.component';
+import {SelectionComponent} from '../selection/selection.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/quick-start', pathMatch: 'full'},
@@ -20,7 +21,8 @@ const routes: Routes = [
     {path: 'style', component: StyleComponent},
     {path: 'outline', component: OutlineComponent},
     {path: 'test', component: TestComponent},
-    {path: 'selector', component: SelectorComponent}
+    {path: 'selector', component: SelectorComponent},
+    {path: 'selection', component: SelectionComponent}
 ];
 
 @NgModule({

@@ -12,3 +12,13 @@
     white-space: nowrap;
     display: inline-block;
 }
+
+#buttonContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+button {
+    margin: 5px 20px;
+}
