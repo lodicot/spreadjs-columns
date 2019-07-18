@@ -126,8 +126,14 @@ export class SelectorComponent implements OnInit {
     this.activeSheetIndex = this.spread.getActiveSheetIndex();
     if ((this.activeSheetIndex + 1) > this.selections.length) {
       this.selections.push(new Array);
+      const columns = this.spread.getActiveSheet().getColumnCount();
+      for (let i = 0; i < columns; i++) {
+        this.selections[this.activeSheetIndex].splice(i, 0, 0);
+      }
     }
     this.getColumnsWidth($event.newSheet);
+    console.log(this.selections);
+
   }
 
   /**
