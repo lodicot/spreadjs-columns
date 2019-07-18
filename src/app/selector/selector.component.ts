@@ -61,7 +61,7 @@ export class SelectorComponent implements OnInit {
   // My settings ************************************************************************************
   rowHeaderVisible = false;
   private rows;
-  private selections: number [][] = [[], [2, 2, 2]];
+  private selections: number [][] = [];
   private rightColumn = 0;
   private activeSheetIndex = null;
 
@@ -108,9 +108,9 @@ export class SelectorComponent implements OnInit {
     self.spread = $event.spread;
     const columns = self.spread.getActiveSheet().getColumnCount();
     self.activeSheetIndex = self.spread.getActiveSheetIndex();
+    self.selections.push(new Array());
     for (let i = 0; i < columns; i++) {
-      this.selections[self.activeSheetIndex][i] = 0;
-
+      self.selections[self.activeSheetIndex].splice(i, 0, 0);
     }
     // tslint:disable-next-line:only-arrow-functions
     setTimeout(function() {
@@ -124,6 +124,9 @@ export class SelectorComponent implements OnInit {
    */
   onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
     this.activeSheetIndex = this.spread.getActiveSheetIndex();
+    if ((this.activeSheetIndex + 1) > this.selections.length) {
+      this.selections.push(new Array);
+    }
     this.getColumnsWidth($event.newSheet);
   }
 
@@ -146,9 +149,9 @@ export class SelectorComponent implements OnInit {
       console.log('column changed');
       this.getColumnsWidth($event.sheet);
       if ($event.propertyName === 'addColumns') {
-        this.selections[0].splice($event.col, 0, 0);
+        this.selections[this.activeSheetIndex].splice($event.col, 0, 0);
       } else {
-        this.selections[0].splice($event.col, 1);
+        this.selections[this.activeSheetIndex].splice($event.col, 1);
       }
     }
   }
@@ -231,7 +234,7 @@ export class SelectorComponent implements OnInit {
   }
 
   onSelectionChanged(serverData: {selectedValue: number, selectedName: string}, index) {
-    this.selections[0].splice(index, 1, serverData.selectedValue);
+    this.selections[this.activeSheetIndex].splice(index, 1, serverData.selectedValue);
     console.log(this.selections);
   }
 
