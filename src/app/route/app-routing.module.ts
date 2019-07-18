@@ -9,7 +9,7 @@ import {StyleComponent} from '../style/app-style.component';
 import {OutlineComponent} from '../outline/app-outline.component';
 import {TestComponent} from '../test/test.component';
 import {SelectorComponent} from '../selector/selector.component';
-import {SelectionComponent} from '../selection/selection.component';
+import {SelectionComponent} from '../selector/selection/selection.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/quick-start', pathMatch: 'full'},

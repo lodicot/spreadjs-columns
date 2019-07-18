@@ -18,7 +18,7 @@ import { SelectorComponent } from './selector/selector.component';
 import {DropButtonComponent} from './selector/drop-button/drop-button.component';
 import { SelectLabelComponent } from './selector/select-label/select-label.component';
 import { SelectMenuComponent } from './selector/select-menu/select-menu.component';
-import { SelectionComponent } from './selection/selection.component';
+import { SelectionComponent } from './selector/selection/selection.component';
 
 
 @NgModule({

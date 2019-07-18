@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {GSpread} from '../selector.component';
+import {ValuesService} from '../../service/values.service';
 
 @Component({
   selector: 'app-select-menu',
@@ -22,9 +23,10 @@ export class SelectMenuComponent implements OnInit {
     {id: 5, name: 'Postal Code'}
   ];
 
-  constructor() { }
+  constructor(private testService: ValuesService) { }
 
   ngOnInit() {
+    this.testService.setValues(this.values);
   }
 
   getWidth() {

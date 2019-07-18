@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./selection.component.css']
 })
 export class SelectionComponent implements OnInit {
+  selector: any;
 
   constructor() { }
 

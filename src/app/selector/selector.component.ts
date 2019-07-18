@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as GC from '@grapecity/spread-sheets';
 import IColumnWidthChangedEventArgs = GC.Spread.Sheets.IColumnWidthChangedEventArgs;
 import ILeftColumnChangedEventArgs = GC.Spread.Sheets.ILeftColumnChangedEventArgs;
@@ -7,6 +7,9 @@ import IColumnChangedEventArgs = GC.Spread.Sheets.IColumnChangedEventArgs;
 import {DataService} from '../app-data.service';
 import {EventsService} from '../service/events.service';
 import SheetArea = GC.Spread.Sheets.SheetArea;
+import {SelectMenuComponent} from './select-menu/select-menu.component';
+import {ValuesService} from '../service/values.service';
+import {Subscription} from 'rxjs';
 
 export namespace GSpread {
   export interface ColumnProperty {
@@ -28,7 +31,8 @@ export namespace GSpread {
   styleUrls: ['./selector.component.css']
 })
 
-export class SelectorComponent implements OnInit {
+export class SelectorComponent implements OnInit, OnDestroy {
+
   // the reference to the spread workbook
   private spread: GC.Spread.Sheets.Workbook;
   // the defaults for the spread workbook
@@ -57,15 +61,27 @@ export class SelectorComponent implements OnInit {
   private selections: number [][] = [];
   private activeSheetIndex = null;
   private numberOfSheets = null;
+  private values: any;
+  private testSubscription: Subscription;
 
   // tslint:disable-next-line:variable-name
-  constructor(private dataservice: DataService) {
+  constructor(private dataservice: DataService, private testService: ValuesService) {
     this.data = dataservice.getPersonAddressData();
   }
 
   ngOnInit() {
     console.log(this.selections);
+    this.testService.getValues().subscribe(
+      (values) => {
+        this.values = values;
+      }
+    );
   }
+
+  ngOnDestroy(): void {
+    this.testSubscription.unsubscribe();
+  }
+
 
   /**
    * spreadjs throws the event after the column with has changed
@@ -110,7 +126,7 @@ export class SelectorComponent implements OnInit {
    */
   onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
     const self = this;
-    self.activeSheetIndex = self.spread.getActiveSheetIndex();
+    const newActiveSheetIndex = self.spread.getActiveSheetIndex();
     const newNumberOfSheets = self.spread.getSheetCount();
     /** Sheet added **/
     if (newNumberOfSheets > (self.numberOfSheets)) {
@@ -118,7 +134,7 @@ export class SelectorComponent implements OnInit {
       self.selections.push(new Array);
       const columns = self.spread.getActiveSheet().getColumnCount();
       for (let i = 0; i < columns; i++) {
-        self.selections[self.activeSheetIndex].push(0);
+        self.selections[newActiveSheetIndex].push(0);
       }
     }
     /** Sheet deleted **/
@@ -126,6 +142,7 @@ export class SelectorComponent implements OnInit {
       console.log('sheet deleted');
       self.selections.splice(self.activeSheetIndex, 1);
     }
+    self.activeSheetIndex = newActiveSheetIndex;
     self.numberOfSheets = newNumberOfSheets;
     this.getColumnsWidth($event.newSheet);
     console.log(this.selections);
@@ -217,6 +234,16 @@ export class SelectorComponent implements OnInit {
   onSelectionChanged(serverData: {selectedValue: number, selectedName: string}, index) {
     this.selections[this.activeSheetIndex].splice(index, 1, serverData.selectedValue);
     console.log(this.selections);
+  }
+
+  onSave() {
+    console.log('Your Selections:');
+    for (let sheet = 0; sheet < this.numberOfSheets; sheet++) {
+      console.log('Spreed Sheet: ' + sheet);
+      for (let col = 0; col < this.selections[sheet].length; col++) {
+        console.log('Column ' + col + ' = ' + this.values[this.selections[sheet][col]].name);
+      }
+    }
   }
 
 }
