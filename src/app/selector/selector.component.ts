@@ -5,9 +5,7 @@ import ILeftColumnChangedEventArgs = GC.Spread.Sheets.ILeftColumnChangedEventArg
 import IActiveSheetChangedEventArgs = GC.Spread.Sheets.IActiveSheetChangedEventArgs;
 import IColumnChangedEventArgs = GC.Spread.Sheets.IColumnChangedEventArgs;
 import {DataService} from '../app-data.service';
-import {EventsService} from '../service/events.service';
 import SheetArea = GC.Spread.Sheets.SheetArea;
-import {SelectMenuComponent} from './select-menu/select-menu.component';
 import {ValuesService} from '../service/values.service';
 import {Subscription} from 'rxjs';
 
@@ -160,9 +158,13 @@ export class SelectorComponent implements OnInit, OnDestroy {
       if ($event.propertyName === 'addColumns') {
         this.selections[this.activeSheetIndex].splice($event.col, 0, 0);
       } else {
-        this.selections[this.activeSheetIndex].splice($event.col, 1);
+        for (let i = 0; i < $event.count; i++) {
+          this.selections[this.activeSheetIndex].splice($event.col, 1);
+        }
       }
     }
+    console.log(this.selections);
+
   }
 
   /**
