@@ -145,11 +145,11 @@ export class SelectorComponent implements OnInit {
     if (this.isResizing === false) {
       console.log('column changed');
       this.getColumnsWidth($event.sheet);
-      // if ($event.propertyName === 'addColumns') {
-      //   this.selections[0].splice($event.col, 0, 0);
-      // } else {
-      //   this.selections.splice($event.col, 1);
-      // }
+      if ($event.propertyName === 'addColumns') {
+        this.selections[0].splice($event.col, 0, 0);
+      } else {
+        this.selections[0].splice($event.col, 1);
+      }
     }
   }
 
