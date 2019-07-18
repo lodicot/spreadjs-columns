@@ -64,6 +64,7 @@ export class SelectorComponent implements OnInit {
   private selections: number [][] = [];
   private rightColumn = 0;
   private activeSheetIndex = null;
+  private numberOfSheets = null;
 
   // tslint:disable-next-line:variable-name
   constructor(private dataservice: DataService, private _eventService: EventsService) {
@@ -107,10 +108,11 @@ export class SelectorComponent implements OnInit {
     const self = this;
     self.spread = $event.spread;
     const columns = self.spread.getActiveSheet().getColumnCount();
+    self.numberOfSheets = self.spread.getSheetCount();
     self.activeSheetIndex = self.spread.getActiveSheetIndex();
     self.selections.push(new Array());
     for (let i = 0; i < columns; i++) {
-      self.selections[self.activeSheetIndex].splice(i, 0, 0);
+      self.selections[self.activeSheetIndex].push(0);
     }
     // tslint:disable-next-line:only-arrow-functions
     setTimeout(function() {
@@ -123,17 +125,26 @@ export class SelectorComponent implements OnInit {
    * @param $event
    */
   onActiveSheetChanged($event: IActiveSheetChangedEventArgs) {
-    this.activeSheetIndex = this.spread.getActiveSheetIndex();
-    if ((this.activeSheetIndex + 1) > this.selections.length) {
-      this.selections.push(new Array);
-      const columns = this.spread.getActiveSheet().getColumnCount();
+    const self = this;
+    self.activeSheetIndex = self.spread.getActiveSheetIndex();
+    const newNumberOfSheets = self.spread.getSheetCount();
+    /** Sheet added **/
+    if (newNumberOfSheets > (self.numberOfSheets)) {
+      console.log('sheet added');
+      self.selections.push(new Array);
+      const columns = self.spread.getActiveSheet().getColumnCount();
       for (let i = 0; i < columns; i++) {
-        this.selections[this.activeSheetIndex].splice(i, 0, 0);
+        self.selections[self.activeSheetIndex].push(0);
       }
     }
+    /** Sheet deleted **/
+    else if (self.spread.getSheetCount() < self.numberOfSheets) {
+      console.log('sheet deleted');
+      self.selections.splice(self.activeSheetIndex, 1);
+    }
+    self.numberOfSheets = newNumberOfSheets;
     this.getColumnsWidth($event.newSheet);
     console.log(this.selections);
-
   }
 
   /**
